@@ -603,7 +603,7 @@
 </div>
 
 <script>
-  const WEBHOOK_URL = 'https://agosell.app.n8n.cloud/webhook/02ff9ffa-5389-4df2-8811-051ac05ebd2c';
+  const WEBHOOK_URL = 'https://agosell.app.n8n.cloud/webhook/4a34fbe1-1171-4b1b-a810-eca1fb4ea3d7';
 
   // ── Multi-step Logic ────────────────────────────────────────
   document.getElementById('btnNext').addEventListener('click', () => {
@@ -655,8 +655,7 @@
       await fetch(WEBHOOK_URL, {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify(data),
-        mode: 'no-cors'
+        body: JSON.stringify(data)
       });
       this.style.display = 'none';
       document.querySelector('.form-progress').style.display = 'none';
