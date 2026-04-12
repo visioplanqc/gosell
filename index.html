@@ -642,28 +642,30 @@
     btn.innerText = 'Initialisation...';
 
     const data = {
-      name: this.name.value,
-      email: this.email.value,
-      phone: this.phone.value,
-      company: this.company.value,
-      expertise: this.expertise.value,
-      goals: this.goals.value,
-      source: 'Landing Premium'
+      name:      document.getElementById('name').value,
+      email:     document.getElementById('email').value,
+      phone:     document.getElementById('phone').value,
+      company:   document.getElementById('company').value,
+      expertise: document.getElementById('expertise').value,
+      goals:     document.getElementById('goals').value,
+      source:    'Landing Premium'
     };
 
     try {
-      await fetch(WEBHOOK_URL, {
+      const res = await fetch(WEBHOOK_URL, {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify(data)
       });
-      this.style.display = 'none';
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+      document.getElementById('leadForm').style.display = 'none';
       document.querySelector('.form-progress').style.display = 'none';
       document.getElementById('successMsg').style.display = 'block';
-    } catch(e) {
+    } catch(err) {
       btn.disabled = false;
-      btn.innerText = 'Réessayer →';
-      alert('Erreur de réseau. Veuillez réessayer.');
+      btn.innerText = 'Soumettre ma participation →';
+      btn.style.background = '#e74c3c';
+      setTimeout(() => btn.style.background = '', 2000);
     }
   });
 
